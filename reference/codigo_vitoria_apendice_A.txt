@@ -1,0 +1,81 @@
+TRANSCRICAO DE REFERENCIA - NAO ENVIAR DIRETAMENTE PARA A PLACA
+
+Fonte:
+SOMBRA, Vitoria Costa. Modelagem, simulacao e implementacao de um
+potenciostato portatil de baixo custo para aplicacao ambiental.
+Dissertacao (Bacharelado em Engenharia da Informacao) - UFABC, 2025.
+Apendice A, p. 57-58 do PDF.
+
+Observacao do Codex:
+O texto abaixo foi reconstruido a partir do PDF. Ele preserva a logica
+publicada, mas o laco "pos <= count" acessa intervalos[1] e vevals[1]
+quando os vetores possuem somente um elemento. No firmware deste
+repositorio esse limite foi corrigido e a transmissao serial durante a
+varredura foi substituida por armazenamento em memoria.
+
+int a = 10;
+int val = 0;
+float ct = A0;
+float c = 0;
+int n = 0;
+float Potstep = 0.0078;
+int vevals[] = {100};
+int const count = 1;
+long intervalos[count];
+
+void setup() {
+  TCCR1B = TCCR1B & B11111000 | B00000010;
+  Serial.begin(9600);
+  pinMode(a, OUTPUT);
+  pinMode(ct, INPUT);
+}
+
+void loop() {
+  for (int pos = 0; pos < count; pos++) {
+    intervalos[pos] = (1000000L / ((vevals[pos]) * 128L));
+  }
+
+  // No PDF consta "pos <= count"; mantido aqui apenas como registro.
+  for (int pos = 0; pos <= count; pos++) {
+    n = 0;
+
+    while (n <= 1) {
+      analogWrite(a, 127);
+      delay(5000);
+
+      for (val = 184; val >= 41; val--) {
+        analogWrite(a, val);
+        Serial.print(val);
+        delay(intervalos[pos]);
+
+        c = analogRead(ct);
+        Serial.print(",");
+        Serial.print(c);
+        Serial.print(",");
+        Serial.print(n);
+        Serial.print(",");
+        Serial.print(vevals[pos]);
+        Serial.print(",");
+        Serial.println(intervalos[pos]);
+      }
+
+      for (val = 41; val <= 184; val++) {
+        analogWrite(a, val);
+        Serial.print(val);
+        delay(intervalos[pos]);
+
+        c = analogRead(ct);
+        Serial.print(",");
+        Serial.print(c);
+        Serial.print(",");
+        Serial.print(n);
+        Serial.print(",");
+        Serial.print(vevals[pos]);
+        Serial.print(",");
+        Serial.println(intervalos[pos]);
+      }
+
+      n = n + 1;
+    }
+  }
+}

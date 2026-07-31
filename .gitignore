@@ -1,0 +1,21 @@
+# Arquivos temporarios gerados durante analises e testes
+tmp/
+
+# Saidas de compilacao do Arduino/ESP32
+build/
+*.bin
+*.elf
+*.hex
+*.map
+
+# Dados locais coletados nos ensaios
+data/
+*.csv
+*.log
+__pycache__/
+*.py[cod]
+
+# Arquivos locais do sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/

@@ -48,22 +48,27 @@ python -m pip install -r requirements.txt
 Esta pinagem e a premissa da primeira versao. A serigrafia do novo
 modulo SX1276 deve ser conferida antes da montagem.
 
-| Arduino Uno | Conversor de nivel | SX1276 | Funcao |
-|---|---|---|---|
-| D13 | HV -> LV | SCK | clock SPI |
-| D12 | HV <-> LV | MISO | dados do radio para o Uno |
-| D11 | HV -> LV | MOSI | dados do Uno para o radio |
-| D7 | HV -> LV | NSS/CS | selecao do radio |
-| D8 | HV -> LV | RESET/RST | reinicio do radio |
-| D2 | HV <-> LV | DIO0 | interrupcao/estado do radio |
-| GND | GND comum | GND | referencia eletrica |
+O conversor fotografado e o **HW-209**. Nele, o lado A e o dominio de
+3,3 V e o lado B e o dominio de 5 V.
+
+| Arduino Uno (5 V) | HW-209 lado B | HW-209 lado A | SX1276 (3,3 V) | Funcao |
+|---|---|---|---|---|
+| D13 | B0 | A0 | SCK | clock SPI |
+| D12 | B1 | A1 | MISO | dados do radio para o Uno |
+| D11 | B2 | A2 | MOSI | dados do Uno para o radio |
+| D7 | B3 | A3 | NSS/CS | selecao do radio |
+| D8 | B4 | A4 | RESET/RST | reinicio do radio |
+| D2 | B5 | A5 | DIO0 | interrupcao/estado do radio |
+| GND | GND | GND | GND | referencia eletrica comum |
+
+Os canais A6/B6 e A7/B7 ficam sem conexao nesta primeira montagem.
 
 Alimentacao:
 
 1. 5 V alimenta a entrada do regulador AMS1117.
-2. A saida de 3,3 V do regulador alimenta o SX1276 e o lado LV do
+2. A saida de 3,3 V do regulador alimenta o SX1276 e os pinos VCCA do
    conversor.
-3. O lado HV do conversor recebe 5 V.
+3. Os pinos VCCB do conversor recebem 5 V do Uno.
 4. Todos os GND devem ser comuns.
 5. Colocar 100 nF em paralelo com 47 uF entre 3,3 V e GND, fisicamente
    proximos ao radio.

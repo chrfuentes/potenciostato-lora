@@ -16,22 +16,23 @@ Este guia resume o primeiro teste. O detalhamento completo esta no
 
 ## Montagem do lado Arduino Uno
 
-1. Ligar 5 V ao lado HV do conversor de nivel.
-2. Ligar a saida 3,3 V do AMS1117 ao lado LV e ao VCC do SX1276.
+1. Ligar 5 V do Uno aos pinos VCCB do conversor HW-209.
+2. Ligar a saida 3,3 V do AMS1117 aos pinos VCCA e ao VCC do SX1276.
 3. Unir todos os GND.
 4. Colocar 100 nF e 47 uF entre 3,3 V e GND, perto do SX1276.
 5. Fazer as ligacoes:
 
-| Uno | SX1276 |
-|---|---|
-| D13 | SCK |
-| D12 | MISO |
-| D11 | MOSI |
-| D7 | NSS/CS |
-| D8 | RESET/RST |
-| D2 | DIO0 |
+| Uno (5 V) | HW-209 lado B | HW-209 lado A | SX1276 (3,3 V) |
+|---|---|---|---|
+| D13 | B0 | A0 | SCK |
+| D12 | B1 | A1 | MISO |
+| D11 | B2 | A2 | MOSI |
+| D7 | B3 | A3 | NSS/CS |
+| D8 | B4 | A4 | RESET/RST |
+| D2 | B5 | A5 | DIO0 |
 
-As linhas passam pelos canais correspondentes do conversor de nivel.
+Os GND das duas laterais do HW-209, do Uno, do AMS1117 e do SX1276
+devem estar unidos. Os canais A6/B6 e A7/B7 ficam livres.
 
 ## Gravacao do teste
 

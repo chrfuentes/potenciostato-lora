@@ -11,6 +11,13 @@ O firmware foi preparado para testes progressivos. Primeiro deve ser
 validado apenas o enlace de radio. A integracao com o circuito analogico
 do potenciostato vem depois.
 
+## Guia ilustrado de montagem
+
+O tutorial completo para o Fritzing 1.0.7, com o diagrama das ligacoes,
+tabelas de pinos, sequencia de testes e checklist de seguranca, esta em:
+
+- [Guia de diagrama no Fritzing e montagem inicial do enlace LoRa](output/pdf/guia_fritzing_montagem_lora.pdf)
+
 ## O que veio do trabalho da Vitoria
 
 A rotina de varredura usa como referencia o codigo do Apendice A da
